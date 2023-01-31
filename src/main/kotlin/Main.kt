@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 
         val runtime = measureTimeMillis {
             var startPosition = 0
-            val markerLength = 4
+            val markerLength = 14
             val offset = markerLength - 1
 
             generateSequence {
