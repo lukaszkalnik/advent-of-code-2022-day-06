@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
             }.map { chunk ->
                 val chunkSet = chunk.toSet()
                 chunkSet.size == markerLength
-            }.takeWhile { found -> !found }.toList()
+            }.takeWhile { found -> !found }.forEach { _ -> }
 
             val markerPosition = startPosition + offset
             println("Marker position: $markerPosition")
