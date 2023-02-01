@@ -10,20 +10,12 @@ fun main(args: Array<String>) {
         val message = readUtf8Line() ?: return
 
         val runtime = measureTimeMillis {
-            var startPosition = 0
-            val markerLength = 14
-            val offset = markerLength - 1
+            val windowLength = 14
 
-            generateSequence {
-                val chunk = message.substring(startPosition..startPosition + offset)
-                ++startPosition
-                chunk
-            }.map { chunk ->
-                val chunkSet = chunk.toSet()
-                chunkSet.size == markerLength
-            }.takeWhile { found -> !found }.forEach { _ -> }
+            val startPosition = message.asSequence().windowed(windowLength)
+                .indexOfFirst { messageWindow -> messageWindow.toSet().size == windowLength }
 
-            val markerPosition = startPosition + offset
+            val markerPosition = startPosition + windowLength
             println("Marker position: $markerPosition")
         }
         println("Runtime: $runtime ms")
