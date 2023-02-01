@@ -12,8 +12,8 @@ fun main(args: Array<String>) {
         val runtime = measureTimeMillis {
             val windowLength = 14
 
-            val startPosition = message.asSequence().windowed(windowLength)
-                .indexOfFirst { messageWindow -> messageWindow.toSet().size == windowLength }
+            val startPosition = message.windowedSequence(windowLength)
+                .indexOfFirst { window -> window.toSet().size == windowLength }
 
             val markerPosition = startPosition + windowLength
             println("Marker position: $markerPosition")
